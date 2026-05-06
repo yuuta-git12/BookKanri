@@ -64,6 +64,16 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
+                <mxCell id="50" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="15" target="49">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="51" value="検索項目入力" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="50">
+                    <mxGeometry x="-0.0667" y="7" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
                 <mxCell id="15" value="操作選択" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
                     <mxGeometry x="130" y="610" width="80" height="80" as="geometry"/>
                 </mxCell>
@@ -90,7 +100,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="書籍詳細画面" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-                    <mxGeometry x="294" y="620" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="404" y="620" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="23" target="31">
                     <mxGeometry relative="1" as="geometry"/>
@@ -128,7 +138,7 @@
                 <mxCell id="43" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="35" target="42">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="190" y="790"/>
+                            <mxPoint x="300" y="790"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -138,13 +148,13 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="35" value="操作選択" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-                    <mxGeometry x="314" y="750" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="424" y="750" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="40" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="37" target="20">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="520" y="980"/>
-                            <mxPoint x="520" y="650"/>
+                            <mxPoint x="630" y="980"/>
+                            <mxPoint x="630" y="650"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -154,14 +164,15 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="37" value="書籍情報編集" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-                    <mxGeometry x="293" y="950" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="403" y="950" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="47" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="42" target="12">
                     <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="340" y="510" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="190" y="1120"/>
-                            <mxPoint x="560" y="1120"/>
-                            <mxPoint x="560" y="510"/>
+                            <mxPoint x="300" y="1120"/>
+                            <mxPoint x="670" y="1120"/>
+                            <mxPoint x="670" y="510"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -171,7 +182,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="42" value="削除確認" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-                    <mxGeometry x="150" y="940" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="260" y="940" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="45" style="edgeStyle=none;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="42" target="35">
                     <mxGeometry relative="1" as="geometry"/>
@@ -180,6 +191,23 @@
                     <mxGeometry x="0.3442" y="-3" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="52" style="edgeStyle=none;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="49" target="12">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="170" y="1160"/>
+                            <mxPoint x="760" y="1160"/>
+                            <mxPoint x="760" y="480"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="53" value="検索結果の書籍情報を返す" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="52">
+                    <mxGeometry x="-0.5292" relative="1" as="geometry">
+                        <mxPoint x="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="49" value="検索実行" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="780" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
