@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Tailwind CSS レイアウトパターン練習帳</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    /* Header */
+    .site-header {
+      background: #0f172a;
+      color: white;
+      padding: 20px 24px;
+    }
+    .site-header .inner { max-width: 900px; margin: 0 auto; }
+    .site-header .label { font-size: 11px; color: #64748b; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .site-header h1 { font-size: 22px; font-weight: 800; }
+    .site-header p { font-size: 13px; color: #94a3b8; margin-top: 6px; }
+
+    /* Layout */
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; display: flex; gap: 20px; }
+
+    /* Sidebar */
+    .sidebar { width: 200px; flex-shrink: 0; }
+    .sidebar-label { font-size: 11px; color: #94a3b8; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .pattern-btn {
+      display: block; width: 100%; text-align: left;
+      padding: 10px 14px; margin-bottom: 6px;
+      border-radius: 10px; border: none; cursor: pointer;
+      font-size: 13px; font-weight: 500;
+      background: white; color: #374151;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: all 0.2s; font-family: inherit;
+    }
+    .pattern-btn.active { color: white; font-weight: 700; }
+
+    .bp-card { margin-top: 24px; background: white; border-radius: 12px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .bp-label { font-size: 11px; color: #94a3b8; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .bp-item { margin-bottom: 8px; }
+    .bp-name { font-size: 12px; font-weight: 600; color: #374151; }
+    .bp-code { font-size: 11px; color: #6b7280; font-family: monospace; background: #f3f4f6; border-radius: 4px; padding: 2px 6px; margin-top: 2px; display: inline-block; }
+
+    /* Main */
+    .main { flex: 1; min-width: 0; }
+
+    .pattern-header { background: white; border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .tag-list { display: flex; gap: 6px; margin-bottom: 8px; }
+    .tag { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+    .pattern-title { font-size: 18px; font-weight: 800; color: #111827; }
+    .pattern-desc { font-size: 13px; color: #6b7280; margin-top: 6px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+    .tab-btn {
+      padding: 8px 16px; border-radius: 8px; border: none;
+      cursor: pointer; font-size: 13px; font-weight: 500;
+      background: white; color: #6b7280;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: all 0.15s; font-family: inherit;
+    }
+    .tab-btn.active { color: white; font-weight: 700; }
+
+    /* Tab content */
+    .tab-content { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    .tab-hint { font-size: 12px; color: #9ca3af; margin-bottom: 12px; }
+
+    /* Preview */
+    .preview-box { background: #f8fafc; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
+
+    /* Code */
+    .code-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .copy-btn {
+      font-size: 12px; padding: 6px 14px; border-radius: 8px;
+      border: none; cursor: pointer; font-weight: 600;
+      background: #f3f4f6; color: #374151;
+      transition: all 0.2s; font-family: inherit;
+    }
+    .copy-btn.copied { background: #10b981; color: white; }
+    pre {
+      background: #0f172a; color: #e2e8f0;
+      border-radius: 10px; padding: 20px;
+      font-size: 12px; line-height: 1.7;
+      overflow: auto; white-space: pre-wrap; word-break: break-word;
+    }
+
+    /* Points */
+    .points-list { display: flex; flex-direction: column; gap: 10px; }
+    .point-item { display: flex; gap: 14px; align-items: flex-start; }
+    .point-cls {
+      font-family: monospace; font-weight: 700; font-size: 12px;
+      padding: 4px 10px; border-radius: 6px;
+      flex-shrink: 0; min-width: 140px;
+    }
+    .point-desc { font-size: 13px; color: #374151; padding-top: 4px; }
+
+    /* Navigation */
+    .nav-btns { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+    .nav-btn {
+      padding: 10px 20px; border-radius: 10px; border: none;
+      cursor: pointer; font-weight: 600; font-size: 13px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: all 0.2s; font-family: inherit;
+    }
+    .nav-btn:disabled { background: #f3f4f6 !important; color: #d1d5db !important; cursor: not-allowed; box-shadow: none; }
+    .nav-prev { background: white; color: #374151; }
+    .nav-next { color: white; }
+    .nav-count { font-size: 13px; color: #9ca3af; }
+
+    /* Preview styles */
+    .pv-center { display: flex; justify-content: center; align-items: center; height: 160px; background: #f1f5f9; }
+    .pv-card { background: white; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); padding: 24px 32px; text-align: center; }
+    .pv-card-title { font-weight: 700; font-size: 15px; color: #1e293b; }
+    .pv-card-sub { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+
+    .pv-page { display: flex; flex-direction: column; height: 160px; border-radius: 8px; overflow: hidden; }
+    .pv-header { background: #2563eb; color: white; font-size: 12px; font-weight: 600; padding: 8px 12px; }
+    .pv-main { flex: 1; background: #f8fafc; font-size: 12px; color: #9ca3af; padding: 10px 12px; }
+    .pv-footer { background: #1e293b; color: white; font-size: 12px; padding: 8px 12px; text-align: center; }
+
+    .pv-sidebar { display: flex; height: 160px; border-radius: 8px; overflow: hidden; }
+    .pv-aside { width: 80px; background: #1e293b; color: white; padding: 10px 8px; flex-shrink: 0; }
+    .pv-aside-title { font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+    .pv-aside-item { font-size: 10px; color: #94a3b8; margin-bottom: 4px; }
+    .pv-content { flex: 1; background: #f8fafc; font-size: 12px; color: #9ca3af; padding: 10px 12px; }
+
+    .pv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 8px; background: #f8fafc; border-radius: 8px; }
+    .pv-grid-card { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 12px 8px; text-align: center; font-size: 11px; font-weight: 600; color: #6b7280; }
+
+    .pv-nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .pv-nav-logo { font-weight: 700; color: #2563eb; font-size: 14px; }
+    .pv-nav-links { display: flex; gap: 16px; font-size: 12px; color: #6b7280; }
+
+    @media (max-width: 640px) {
+      .container { flex-direction: column; }
+      .sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <div class="label">TAILWIND CSS</div>
+    <h1>レイアウトパターン 練習帳</h1>
+    <p>よく使う5つの基礎パターンをコードと解説で身につける</p>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-label">PATTERNS</div>
+    <button class="pattern-btn active" data-index="0" onclick="selectPattern(0)">① 中央寄せ</button>
+    <button class="pattern-btn" data-index="1" onclick="selectPattern(1)">② ヘッダー＋メイン＋フッター</button>
+    <button class="pattern-btn" data-index="2" onclick="selectPattern(2)">③ サイドバー付きレイアウト</button>
+    <button class="pattern-btn" data-index="3" onclick="selectPattern(3)">④ カードグリッド（レスポンシブ）</button>
+    <button class="pattern-btn" data-index="4" onclick="selectPattern(4)">⑤ ナビゲーションバー</button>
+
+    <div class="bp-card">
+      <div class="bp-label">BREAKPOINTS</div>
+      <div class="bp-item">
+        <div class="bp-name">📱 スマホ</div>
+        <div class="bp-code">デフォルト（〜639px）</div>
+      </div>
+      <div class="bp-item">
+        <div class="bp-name">💻 タブレット</div>
+        <div class="bp-code">sm: （640px〜）</div>
+      </div>
+      <div class="bp-item">
+        <div class="bp-name">🖥️ PC</div>
+        <div class="bp-code">lg: （1024px〜）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Pattern header -->
+    <div class="pattern-header">
+      <div class="tag-list" id="tagList"></div>
+      <div class="pattern-title" id="patternTitle"></div>
+      <div class="pattern-desc" id="patternDesc"></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="selectTab('preview')">👁️ プレビュー</button>
+      <button class="tab-btn" onclick="selectTab('code')">💻 コード</button>
+      <button class="tab-btn" onclick="selectTab('points')">📌 クラス解説</button>
+    </div>
+
+    <!-- Tab content -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-preview">
+        <div class="tab-hint">実際の表示イメージ</div>
+        <div class="preview-box" id="previewBox"></div>
+      </div>
+
+      <div class="tab-pane" id="tab-code">
+        <div class="code-header">
+          <span class="tab-hint" style="margin:0">コードをコピーして使ってみよう</span>
+          <button class="copy-btn" id="copyBtn" onclick="copyCode()">コピー</button>
+        </div>
+        <pre id="codeBlock"></pre>
+      </div>
+
+      <div class="tab-pane" id="tab-points">
+        <div class="tab-hint">このパターンで覚えるべきクラス</div>
+        <div class="points-list" id="pointsList"></div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-btns">
+      <button class="nav-btn nav-prev" id="btnPrev" onclick="navigate(-1)">← 前のパターン</button>
+      <span class="nav-count" id="navCount"></span>
+      <button class="nav-btn nav-next" id="btnNext" onclick="navigate(1)">次のパターン →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const patterns = [
+    {
+      title: "① 中央寄せ",
+      desc: "FlexboxでX軸・Y軸の中央に配置する最頻出パターン",
+      tags: ["Flexbox", "基礎"],
+      color: "#6366f1",
+      code: `<div class="flex justify-center items-center h-screen bg-gray-100">
+  <div class="bg-white rounded-xl shadow-lg p-8">
+    <h1 class="text-2xl font-bold text-gray-800">中央寄せ</h1>
+    <p class="text-gray-500 mt-2">画面の中央に配置されます</p>
+  </div>
+</div>`,
+      points: [
+        { cls: "flex", desc: "子要素を横並びにする（Flexboxを有効化）" },
+        { cls: "justify-center", desc: "横方向（主軸）を中央に" },
+        { cls: "items-center", desc: "縦方向（交差軸）を中央に" },
+        { cls: "h-screen", desc: "高さを画面いっぱいに（100vh）" },
+      ],
+      preview: `<div class="pv-center">
+        <div class="pv-card">
+          <div class="pv-card-title">中央寄せ</div>
+          <div class="pv-card-sub">justify-center + items-center</div>
+        </div>
+      </div>`,
+    },
+    {
+      title: "② ヘッダー＋メイン＋フッター",
+      desc: "縦方向の基本レイアウト。flex-1でメインが残りの高さを埋める",
+      tags: ["Flexbox", "ページ構成"],
+      color: "#10b981",
+      code: `<div class="flex flex-col min-h-screen">
+  <header class="bg-blue-600 text-white p-4">
+    ヘッダー
+  </header>
+
+  <main class="flex-1 p-6 bg-gray-50">
+    メインコンテンツ（残りの高さを埋める）
+  </main>
+
+  <footer class="bg-gray-800 text-white p-4 text-center">
+    フッター
+  </footer>
+</div>`,
+      points: [
+        { cls: "flex flex-col", desc: "縦方向にFlexboxを適用" },
+        { cls: "min-h-screen", desc: "最低でも画面全体の高さを確保" },
+        { cls: "flex-1", desc: "残りのスペースをすべてmainが占める（重要！）" },
+      ],
+      preview: `<div class="pv-page">
+        <div class="pv-header">ヘッダー</div>
+        <div class="pv-main">メインコンテンツ（flex-1 で残りを占有）</div>
+        <div class="pv-footer">フッター</div>
+      </div>`,
+    },
+    {
+      title: "③ サイドバー付きレイアウト",
+      desc: "左サイドバー＋右コンテンツ。管理画面や記事ページでよく使う",
+      tags: ["Flexbox", "ページ構成"],
+      color: "#f59e0b",
+      code: `<div class="flex min-h-screen">
+  <!-- サイドバー（幅固定） -->
+  <aside class="w-64 bg-gray-900 text-white p-4">
+    サイドバー
+  </aside>
+
+  <!-- メインコンテンツ（残り全部） -->
+  <main class="flex-1 bg-gray-50 p-6">
+    コンテンツエリア
+  </main>
+</div>`,
+      points: [
+        { cls: "w-64", desc: "サイドバーの幅を固定（16rem = 256px）" },
+        { cls: "flex-1", desc: "メインが残りの幅をすべて使う" },
+        { cls: "flex", desc: "横並びにするのでflex-colは不要" },
+      ],
+      preview: `<div class="pv-sidebar">
+        <div class="pv-aside">
+          <div class="pv-aside-title">サイドバー</div>
+          <div class="pv-aside-item">メニュー1</div>
+          <div class="pv-aside-item">メニュー2</div>
+          <div class="pv-aside-item">メニュー3</div>
+        </div>
+        <div class="pv-content">メインコンテンツ（flex-1 で残りを占有）</div>
+      </div>`,
+    },
+    {
+      title: "④ カードグリッド（レスポンシブ）",
+      desc: "画面幅に応じてカラム数が変わる。最もよく使うレスポンシブパターン",
+      tags: ["Grid", "レスポンシブ"],
+      color: "#ec4899",
+      code: `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+  <div class="bg-white rounded-xl shadow p-6">カード1</div>
+  <div class="bg-white rounded-xl shadow p-6">カード2</div>
+  <div class="bg-white rounded-xl shadow p-6">カード3</div>
+  <div class="bg-white rounded-xl shadow p-6">カード4</div>
+  <div class="bg-white rounded-xl shadow p-6">カード5</div>
+  <div class="bg-white rounded-xl shadow p-6">カード6</div>
+</div>`,
+      points: [
+        { cls: "grid-cols-1", desc: "スマホ：1列" },
+        { cls: "sm:grid-cols-2", desc: "タブレット（640px〜）：2列" },
+        { cls: "lg:grid-cols-3", desc: "PC（1024px〜）：3列" },
+        { cls: "gap-6", desc: "カード間のすき間（1.5rem）" },
+      ],
+      preview: `<div class="pv-grid">
+        <div class="pv-grid-card">カード1</div>
+        <div class="pv-grid-card">カード2</div>
+        <div class="pv-grid-card">カード3</div>
+        <div class="pv-grid-card">カード4</div>
+        <div class="pv-grid-card">カード5</div>
+        <div class="pv-grid-card">カード6</div>
+      </div>`,
+    },
+    {
+      title: "⑤ ナビゲーションバー",
+      desc: "ロゴ左・リンク右の横並び。justify-betweenが鍵",
+      tags: ["Flexbox", "コンポーネント"],
+      color: "#8b5cf6",
+      code: `<nav class="flex justify-between items-center px-6 py-4 bg-white shadow">
+  <!-- ロゴ（左） -->
+  <div class="font-bold text-xl text-blue-600">MySite</div>
+
+  <!-- ナビリンク（右） -->
+  <ul class="flex gap-6 text-gray-600">
+    <li><a href="#" class="hover:text-blue-600">Home</a></li>
+    <li><a href="#" class="hover:text-blue-600">About</a></li>
+    <li><a href="#" class="hover:text-blue-600">Contact</a></li>
+  </ul>
+</nav>`,
+      points: [
+        { cls: "justify-between", desc: "左右の要素を両端に配置（最重要！）" },
+        { cls: "items-center", desc: "縦方向を中央揃えに" },
+        { cls: "gap-6", desc: "リンク間のすき間" },
+        { cls: "hover:text-blue-600", desc: "ホバー時に色が変わる" },
+      ],
+      preview: `<div style="padding: 8px;">
+        <div class="pv-nav">
+          <div class="pv-nav-logo">MyLogo</div>
+          <div class="pv-nav-links">
+            <span>Home</span>
+            <span>About</span>
+            <span>Contact</span>
+          </div>
+        </div>
+      </div>`,
+    },
+  ];
+
+  let current = 0;
+  let currentTab = 'preview';
+
+  function selectPattern(index) {
+    current = index;
+    const p = patterns[index];
+
+    // Update sidebar buttons
+    document.querySelectorAll('.pattern-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
+      btn.style.background = i === index ? p.color : 'white';
+      btn.style.color = i === index ? 'white' : '#374151';
+      btn.style.boxShadow = i === index ? `0 4px 12px ${p.color}44` : '0 1px 3px rgba(0,0,0,0.06)';
+    });
+
+    // Update header
+    const tagList = document.getElementById('tagList');
+    tagList.innerHTML = p.tags.map(t =>
+      `<span class="tag" style="background:${p.color}18;color:${p.color}">${t}</span>`
+    ).join('');
+    document.getElementById('patternTitle').textContent = p.title;
+    document.getElementById('patternDesc').textContent = p.desc;
+
+    // Update preview
+    document.getElementById('previewBox').innerHTML = p.preview;
+
+    // Update code
+    document.getElementById('codeBlock').textContent = p.code;
+
+    // Update points
+    const pointsList = document.getElementById('pointsList');
+    pointsList.innerHTML = p.points.map(pt =>
+      `<div class="point-item">
+        <div class="point-cls" style="background:${p.color}18;color:${p.color}">${pt.cls}</div>
+        <div class="point-desc">${pt.desc}</div>
+      </div>`
+    ).join('');
+
+    // Update next button color
+    const btnNext = document.getElementById('btnNext');
+    btnNext.style.background = index === patterns.length - 1 ? '#f3f4f6' : p.color;
+    btnNext.style.boxShadow = index === patterns.length - 1 ? 'none' : `0 4px 12px ${p.color}44`;
+
+    // Update nav
+    document.getElementById('btnPrev').disabled = index === 0;
+    document.getElementById('btnNext').disabled = index === patterns.length - 1;
+    document.getElementById('navCount').textContent = `${index + 1} / ${patterns.length}`;
+
+    // Update active tab color
+    updateTabColors(p.color);
+  }
+
+  function selectTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+
+    const p = patterns[current];
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+      const tabs = ['preview', 'code', 'points'];
+      const isActive = tabs[i] === tab;
+      btn.classList.toggle('active', isActive);
+      btn.style.background = isActive ? p.color : 'white';
+      btn.style.color = isActive ? 'white' : '#6b7280';
+    });
+  }
+
+  function updateTabColors(color) {
+    const tabs = ['preview', 'code', 'points'];
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+      if (btn.classList.contains('active')) {
+        btn.style.background = color;
+      }
+    });
+  }
+
+  function navigate(dir) {
+    const next = current + dir;
+    if (next >= 0 && next < patterns.length) {
+      selectPattern(next);
+      selectTab(currentTab);
+    }
+  }
+
+  function copyCode() {
+    const code = patterns[current].code;
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ コピー完了';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'コピー';
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  }
+
+  // Initialize
+  selectPattern(0);
+  selectTab('preview');
+</script>
+</body>
+</html>
