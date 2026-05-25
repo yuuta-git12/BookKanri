@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>書籍管理アプリ — ワイヤーフレーム</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+          tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                  navy: { 800: '#1e293b', 900: '#0f172a' }
+                }
+              }
+            }
+          }
+        </script>
+        <style>
+          /* Tailwindで補えない細かいスタイルのみここに記述 */
+          .badge { @apply inline-block text-xs font-medium px-2 py-0.5 rounded-full; }
+          .action-btn { @apply text-xs border border-gray-200 rounded px-2 py-0.5 text-gray-500 hover:bg-gray-50; }
+          .sidebar-item { @apply flex items-center gap-2 px-4 py-2 text-sm text-gray-500 cursor-pointer hover:bg-white; }
+          .sidebar-item.active { @apply bg-white text-gray-900 font-medium border-r-2 border-slate-800; }
+          .form-label { @apply block text-xs font-medium text-gray-500 mb-1; }
+          .form-input { @apply w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-400 bg-white; }
+          .form-input-error { @apply w-full border border-red-300 rounded-lg px-3 py-1.5 text-sm text-gray-400 bg-white; }
+          .form-select { @apply w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm bg-white; }
+        </style>
+      </head>
+<body class="bg-gray-50 font-sans text-gray-900 p-8 space-y-12">
+
+  <!-- ===== タイトル ===== -->
+  <div class="text-center">
+    <h1 class="text-2xl font-bold text-slate-800 mb-1">ログイン画面 (C-01) — ワイヤーフレーム</h1>
+    <p class="text-sm text-gray-400">対象ロール: 管理者・利用ユーザー</p>
+  </div>
+
+  <!-- ========================================
+       パターン1: 通常状態（空フォーム）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン1 — 通常状態</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <!-- ナビバー -->
+      <nav class="bg-slate-800 flex items-center px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
+          📚 My本棚
+        </span>
+      </nav>
+
+      <!-- コンテンツ（ログインカード） -->
+      <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-100 p-8">
+
+          <!-- ロゴ・タイトル -->
+          <div class="text-center mb-6">
+            <div class="text-3xl mb-2">📚</div>
+            <h2 class="text-lg font-semibold text-slate-800">My本棚</h2>
+            <p class="text-xs text-gray-400 mt-0.5">書籍管理アプリにログイン</p>
+          </div>
+
+          <!-- フォーム -->
+          <div class="space-y-4">
+            <!-- メールアドレス -->
+            <div>
+              <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+              <input type="text" class="form-input" placeholder="example@mail.com" disabled>
+            </div>
+
+            <!-- パスワード -->
+            <div>
+              <label class="form-label">パスワード <span class="text-red-400">*</span></label>
+              <div class="relative">
+                <input type="text" class="form-input pr-9" placeholder="••••••••" disabled>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+              </div>
+            </div>
+
+            <!-- ログインボタン -->
+            <button class="w-full bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700 mt-2">
+              ログイン
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン2: バリデーションエラー（未入力）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン2 — バリデーションエラー（未入力送信）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <!-- ナビバー -->
+      <nav class="bg-slate-800 flex items-center px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
+          📚 My本棚
+        </span>
+      </nav>
+
+      <!-- コンテンツ -->
+      <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
+
+          <!-- ロゴ・タイトル -->
+          <div class="text-center mb-6">
+            <div class="text-3xl mb-2">📚</div>
+            <h2 class="text-lg font-semibold text-slate-800">My本棚</h2>
+            <p class="text-xs text-gray-400 mt-0.5">書籍管理アプリにログイン</p>
+          </div>
+
+          <!-- フォーム -->
+          <div class="space-y-4">
+            <!-- メールアドレス（エラー） -->
+            <div>
+              <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+              <input type="text" class="form-input-error" placeholder="example@mail.com" disabled>
+              <p class="text-xs text-red-500 mt-1">メールアドレスを入力してください</p>
+            </div>
+
+            <!-- パスワード（エラー） -->
+            <div>
+              <label class="form-label">パスワード <span class="text-red-400">*</span></label>
+              <div class="relative">
+                <input type="text" class="form-input-error pr-9" placeholder="••••••••" disabled>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+              </div>
+              <p class="text-xs text-red-500 mt-1">パスワードを入力してください</p>
+            </div>
+
+            <!-- ログインボタン -->
+            <button class="w-full bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700 mt-2">
+              ログイン
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン3: 認証エラー（メール・パスワード不一致）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン3 — 認証エラー（メールアドレスまたはパスワード不一致）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <!-- ナビバー -->
+      <nav class="bg-slate-800 flex items-center px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
+          📚 My本棚
+        </span>
+      </nav>
+
+      <!-- コンテンツ -->
+      <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
+
+          <!-- ロゴ・タイトル -->
+          <div class="text-center mb-6">
+            <div class="text-3xl mb-2">📚</div>
+            <h2 class="text-lg font-semibold text-slate-800">My本棚</h2>
+            <p class="text-xs text-gray-400 mt-0.5">書籍管理アプリにログイン</p>
+          </div>
+
+          <!-- 認証エラーバナー -->
+          <div class="bg-red-50 border border-red-200 rounded-lg px-3 py-2.5 mb-4 flex items-start gap-2">
+            <span class="text-red-400 text-sm mt-0.5">⚠</span>
+            <p class="text-xs text-red-600">メールアドレスまたはパスワードが違います</p>
+          </div>
+
+          <!-- フォーム -->
+          <div class="space-y-4">
+            <!-- メールアドレス -->
+            <div>
+              <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+              <input type="text" class="form-input-error" placeholder="example@mail.com" disabled>
+            </div>
+
+            <!-- パスワード -->
+            <div>
+              <label class="form-label">パスワード <span class="text-red-400">*</span></label>
+              <div class="relative">
+                <input type="text" class="form-input-error pr-9" placeholder="••••••••" disabled>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+              </div>
+            </div>
+
+            <!-- ログインボタン -->
+            <button class="w-full bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700 mt-2">
+              ログイン
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================
+       遷移メモ
+  ======================================== -->
+  <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">画面遷移メモ</h3>
+    <div class="grid grid-cols-2 gap-4 text-xs text-gray-600">
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">認証成功</p>
+        <p>利用ユーザー → <span class="font-mono bg-gray-100 px-1 rounded">U-01</span> 書籍一覧画面</p>
+        <p>管理者 → <span class="font-mono bg-gray-100 px-1 rounded">A-01</span> 管理メニュー画面</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">認証失敗</p>
+        <p><span class="font-mono bg-gray-100 px-1 rounded">C-01</span> にとどまり、エラーメッセージ表示</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
