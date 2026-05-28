@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書籍管理アプリ — ワイヤーフレーム</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 800: '#1e293b', 900: '#0f172a' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="docs/design/view/ワイヤーフレーム/common.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 p-8 space-y-12">
+
+  <!-- ===== タイトル ===== -->
+  <div class="text-center">
+    <h1 class="text-2xl font-bold text-slate-800 mb-1">全ユーザー書籍一覧画面 (A-05) — ワイヤーフレーム</h1>
+    <p class="text-sm text-gray-400">対象ロール: 管理者</p>
+  </div>
+
+  <!-- ========================================
+       パターン1: 通常状態（全ユーザー書籍一覧）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン1 — 通常状態</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-3">
+          <button class="text-slate-400 text-xs hover:text-slate-200">← メニューへ</button>
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <div class="p-5">
+        <div class="mb-4">
+          <h2 class="text-base font-medium text-gray-900 mb-0.5">全ユーザー書籍一覧</h2>
+          <p class="text-xs text-gray-400">全利用ユーザーの書籍データを管理</p>
+        </div>
+
+        <!-- 検索フォーム -->
+        <div class="flex items-center gap-3 mb-4 bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <div class="flex items-center gap-2 flex-1">
+            <label class="text-xs text-gray-500 whitespace-nowrap">ユーザー名</label>
+            <select class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 w-36">
+              <option>すべてのユーザー</option>
+              <option>田中 太郎</option>
+              <option>鈴木 花子</option>
+              <option>佐藤 三郎</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2 flex-1">
+            <label class="text-xs text-gray-500 whitespace-nowrap">キーワード</label>
+            <div class="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-1.5 flex-1 bg-white">
+              <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+              <span class="text-xs text-gray-400">書籍名・著者名で検索...</span>
+            </div>
+          </div>
+          <button class="bg-slate-800 text-white text-xs px-3 py-1.5 rounded-lg hover:bg-slate-700 whitespace-nowrap">検索</button>
+        </div>
+
+        <!-- テーブル -->
+        <div class="border border-gray-100 rounded-lg overflow-hidden">
+          <table class="w-full text-xs">
+            <thead class="bg-gray-50 border-b border-gray-100">
+              <tr>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">ユーザー名</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">書籍名</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">著者</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">カテゴリー</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">書籍種別</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">登録日</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">操作</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-white text-xs">田</div>
+                    <span class="text-gray-600">田中 太郎</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-800">リーダブルコード</td>
+                <td class="px-4 py-3 text-gray-600">Dustin Boswell</td>
+                <td class="px-4 py-3 text-gray-600">プログラミング</td>
+                <td class="px-4 py-3"><span class="badge bg-purple-100 text-purple-700">電子書籍</span></td>
+                <td class="px-4 py-3 text-gray-500">2026-05-01</td>
+                <td class="px-4 py-3 space-x-1">
+                  <button class="action-btn">編集</button>
+                  <button class="action-btn text-red-400 border-red-200 hover:bg-red-50">削除</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-full bg-green-400 flex items-center justify-center text-white text-xs">鈴</div>
+                    <span class="text-gray-600">鈴木 花子</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-800">Clean Architecture</td>
+                <td class="px-4 py-3 text-gray-600">Robert C. Martin</td>
+                <td class="px-4 py-3 text-gray-600">設計</td>
+                <td class="px-4 py-3"><span class="badge bg-green-100 text-green-700">紙</span></td>
+                <td class="px-4 py-3 text-gray-500">2026-05-05</td>
+                <td class="px-4 py-3 space-x-1">
+                  <button class="action-btn">編集</button>
+                  <button class="action-btn text-red-400 border-red-200 hover:bg-red-50">削除</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-white text-xs">田</div>
+                    <span class="text-gray-600">田中 太郎</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-800">ゼロから始めるDeep Learning</td>
+                <td class="px-4 py-3 text-gray-600">斎藤 康毅</td>
+                <td class="px-4 py-3 text-gray-600">AI・機械学習</td>
+                <td class="px-4 py-3"><span class="badge bg-green-100 text-green-700">紙</span></td>
+                <td class="px-4 py-3 text-gray-500">2026-05-10</td>
+                <td class="px-4 py-3 space-x-1">
+                  <button class="action-btn">編集</button>
+                  <button class="action-btn text-red-400 border-red-200 hover:bg-red-50">削除</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-full bg-orange-400 flex items-center justify-center text-white text-xs">佐</div>
+                    <span class="text-gray-600">佐藤 三郎</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-800">Laravel実践入門</td>
+                <td class="px-4 py-3 text-gray-600">山田 太郎</td>
+                <td class="px-4 py-3 text-gray-600">Web開発</td>
+                <td class="px-4 py-3"><span class="badge bg-purple-100 text-purple-700">電子書籍</span></td>
+                <td class="px-4 py-3 text-gray-500">2026-05-15</td>
+                <td class="px-4 py-3 space-x-1">
+                  <button class="action-btn">編集</button>
+                  <button class="action-btn text-red-400 border-red-200 hover:bg-red-50">削除</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ページネーション -->
+        <div class="flex items-center justify-end gap-1.5 mt-3">
+          <span class="text-xs text-gray-400 mr-2">全24件</span>
+          <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50">‹</button>
+          <button class="w-7 h-7 flex items-center justify-center bg-slate-800 text-white rounded text-xs">1</button>
+          <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50">2</button>
+          <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50">3</button>
+          <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン2: ユーザー絞り込み後
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン2 — ユーザー「田中 太郎」で絞り込み後</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <div class="p-5">
+        <div class="mb-4">
+          <h2 class="text-base font-medium text-gray-900 mb-0.5">全ユーザー書籍一覧</h2>
+        </div>
+
+        <!-- 検索フォーム（絞り込み中） -->
+        <div class="flex items-center gap-3 mb-3 bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <div class="flex items-center gap-2 flex-1">
+            <label class="text-xs text-gray-500 whitespace-nowrap">ユーザー名</label>
+            <select class="text-xs border border-blue-300 rounded-lg px-2 py-1.5 bg-white text-gray-700 w-36">
+              <option>田中 太郎</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2 flex-1">
+            <label class="text-xs text-gray-500 whitespace-nowrap">キーワード</label>
+            <div class="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-1.5 flex-1 bg-white">
+              <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+              <span class="text-xs text-gray-400">書籍名・著者名で検索...</span>
+            </div>
+          </div>
+          <button class="bg-slate-800 text-white text-xs px-3 py-1.5 rounded-lg hover:bg-slate-700">検索</button>
+        </div>
+
+        <!-- 検索結果バッジ -->
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs text-gray-500">検索結果:</span>
+          <span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
+            ユーザー: 田中 太郎
+            <button class="text-blue-400 hover:text-blue-600 ml-0.5">×</button>
+          </span>
+          <span class="text-xs text-gray-400">2件</span>
+        </div>
+
+        <div class="border border-gray-100 rounded-lg overflow-hidden">
+          <table class="w-full text-xs">
+            <thead class="bg-gray-50 border-b border-gray-100">
+              <tr>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">ユーザー名</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">書籍名</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">著者</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">カテゴリー</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">書籍種別</th>
+                <th class="text-left px-4 py-2.5 text-gray-500 font-medium">操作</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-white text-xs">田</div>
+                    <span class="text-gray-600">田中 太郎</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-800">リーダブルコード</td>
+                <td class="px-4 py-3 text-gray-600">Dustin Boswell</td>
+                <td class="px-4 py-3 text-gray-600">プログラミング</td>
+                <td class="px-4 py-3"><span class="badge bg-purple-100 text-purple-700">電子書籍</span></td>
+                <td class="px-4 py-3 space-x-1">
+                  <button class="action-btn">編集</button>
+                  <button class="action-btn text-red-400 border-red-200 hover:bg-red-50">削除</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-white text-xs">田</div>
+                    <span class="text-gray-600">田中 太郎</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-800">ゼロから始めるDeep Learning</td>
+                <td class="px-4 py-3 text-gray-600">斎藤 康毅</td>
+                <td class="px-4 py-3 text-gray-600">AI・機械学習</td>
+                <td class="px-4 py-3"><span class="badge bg-green-100 text-green-700">紙</span></td>
+                <td class="px-4 py-3 space-x-1">
+                  <button class="action-btn">編集</button>
+                  <button class="action-btn text-red-400 border-red-200 hover:bg-red-50">削除</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン3: 削除確認モーダル
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン3 — 削除確認モーダル表示時</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm relative">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <!-- 背景（ぼかし） -->
+      <div class="p-5 opacity-30">
+        <div class="border border-gray-100 rounded-lg overflow-hidden">
+          <table class="w-full text-xs">
+            <thead class="bg-gray-50 border-b border-gray-100">
+              <tr>
+                <th class="px-4 py-2.5 text-left text-gray-500 font-medium">ユーザー名</th>
+                <th class="px-4 py-2.5 text-left text-gray-500 font-medium">書籍名</th>
+                <th class="px-4 py-2.5 text-left text-gray-500 font-medium">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="px-4 py-3">田中 太郎</td><td class="px-4 py-3">リーダブルコード</td><td class="px-4 py-3">...</td></tr>
+              <tr><td class="px-4 py-3">鈴木 花子</td><td class="px-4 py-3">Clean Architecture</td><td class="px-4 py-3">...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- モーダル -->
+      <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+        <div class="bg-white rounded-xl shadow-xl border border-gray-200 w-80 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-lg">🗑</div>
+            <h3 class="text-sm font-semibold text-gray-800">書籍を削除しますか？</h3>
+          </div>
+          <p class="text-xs text-gray-500 mb-1">「リーダブルコード」（田中 太郎）を削除します。</p>
+          <p class="text-xs text-red-500 mb-5">この操作は取り消せません。</p>
+          <div class="flex gap-2">
+            <button class="flex-1 border border-gray-200 text-gray-600 text-sm py-2 rounded-lg hover:bg-gray-50">キャンセル</button>
+            <button class="flex-1 bg-red-500 text-white text-sm py-2 rounded-lg hover:bg-red-600">削除する</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       遷移メモ
+  ======================================== -->
+  <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">画面遷移メモ</h3>
+    <div class="grid grid-cols-3 gap-4 text-xs text-gray-600">
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">編集ボタン</p>
+        <p>→ <span class="font-mono bg-gray-100 px-1 rounded">U-05</span> 書籍情報編集画面（流用）</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">削除完了後</p>
+        <p>→ <span class="font-mono bg-gray-100 px-1 rounded">A-05</span> 一覧更新（同画面）</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">遷移元</p>
+        <p>← <span class="font-mono bg-gray-100 px-1 rounded">A-01</span> 管理メニュー画面</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

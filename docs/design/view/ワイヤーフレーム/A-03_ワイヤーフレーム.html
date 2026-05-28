@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書籍管理アプリ — ワイヤーフレーム</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 800: '#1e293b', 900: '#0f172a' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="docs/design/view/ワイヤーフレーム/common.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 p-8 space-y-12">
+
+  <!-- ===== タイトル ===== -->
+  <div class="text-center">
+    <h1 class="text-2xl font-bold text-slate-800 mb-1">ユーザー登録フォーム (A-03) — ワイヤーフレーム</h1>
+    <p class="text-sm text-gray-400">対象ロール: 管理者</p>
+  </div>
+
+  <!-- ========================================
+       パターン1: 通常状態（空フォーム）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン1 — 通常状態</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-3">
+          <button class="text-slate-400 text-xs hover:text-slate-200">← ユーザー一覧へ</button>
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <div class="p-6 max-w-md mx-auto">
+
+        <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+          <span>管理メニュー</span><span>›</span>
+          <span>ユーザー一覧</span><span>›</span>
+          <span class="text-gray-600">ユーザー登録</span>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+
+          <h2 class="text-sm font-semibold text-gray-800 mb-2">新規ユーザーを登録する</h2>
+
+          <!-- ユーザー名 -->
+          <div>
+            <label class="form-label">ユーザー名 <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" placeholder="例: 田中 太郎" disabled>
+          </div>
+
+          <!-- メールアドレス -->
+          <div>
+            <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" placeholder="例: tanaka@example.com" disabled>
+          </div>
+
+          <!-- パスワード -->
+          <div>
+            <label class="form-label">パスワード <span class="text-red-400">*</span></label>
+            <div class="relative">
+              <input type="text" class="form-input pr-9" placeholder="••••••••（8文字以上）" disabled>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+            </div>
+          </div>
+
+          <!-- パスワード（確認） -->
+          <div>
+            <label class="form-label">パスワード（確認） <span class="text-red-400">*</span></label>
+            <div class="relative">
+              <input type="text" class="form-input pr-9" placeholder="••••••••（確認用）" disabled>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+            </div>
+          </div>
+
+          <!-- ボタン -->
+          <div class="flex gap-2 pt-2">
+            <button class="flex-1 bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700">登録する</button>
+            <button class="border border-gray-200 text-gray-500 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">キャンセル</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン2: バリデーションエラー
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン2 — バリデーションエラー（パスワード不一致・メール重複）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-3">
+          <button class="text-slate-400 text-xs hover:text-slate-200">← ユーザー一覧へ</button>
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <div class="p-6 max-w-md mx-auto">
+
+        <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+          <span>管理メニュー</span><span>›</span>
+          <span>ユーザー一覧</span><span>›</span>
+          <span class="text-gray-600">ユーザー登録</span>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+
+          <h2 class="text-sm font-semibold text-gray-800 mb-2">新規ユーザーを登録する</h2>
+
+          <div>
+            <label class="form-label">ユーザー名 <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="田中 太郎" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input-error" value="tanaka@example.com" disabled>
+            <p class="text-xs text-red-500 mt-1">このメールアドレスはすでに登録されています</p>
+          </div>
+
+          <div>
+            <label class="form-label">パスワード <span class="text-red-400">*</span></label>
+            <div class="relative">
+              <input type="text" class="form-input pr-9" placeholder="••••••••" disabled>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label">パスワード（確認） <span class="text-red-400">*</span></label>
+            <div class="relative">
+              <input type="text" class="form-input-error pr-9" placeholder="••••••••" disabled>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+            </div>
+            <p class="text-xs text-red-500 mt-1">パスワードが一致しません</p>
+          </div>
+
+          <div class="flex gap-2 pt-2">
+            <button class="flex-1 bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700">登録する</button>
+            <button class="border border-gray-200 text-gray-500 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">キャンセル</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       遷移メモ
+  ======================================== -->
+  <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">画面遷移メモ</h3>
+    <div class="grid grid-cols-3 gap-4 text-xs text-gray-600">
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">登録成功</p>
+        <p>→ <span class="font-mono bg-gray-100 px-1 rounded">A-02</span> ユーザー一覧画面</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">キャンセル</p>
+        <p>→ <span class="font-mono bg-gray-100 px-1 rounded">A-02</span> ユーザー一覧画面</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">遷移元</p>
+        <p>← <span class="font-mono bg-gray-100 px-1 rounded">A-02</span> 新規登録ボタン押下</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

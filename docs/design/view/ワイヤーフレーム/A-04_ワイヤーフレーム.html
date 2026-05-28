@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書籍管理アプリ — ワイヤーフレーム</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 800: '#1e293b', 900: '#0f172a' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="docs/design/view/ワイヤーフレーム/common.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 p-8 space-y-12">
+
+  <!-- ===== タイトル ===== -->
+  <div class="text-center">
+    <h1 class="text-2xl font-bold text-slate-800 mb-1">ユーザー情報編集画面 (A-04) — ワイヤーフレーム</h1>
+    <p class="text-sm text-gray-400">対象ロール: 管理者</p>
+  </div>
+
+  <!-- ========================================
+       パターン1: 通常状態（有効アカウント）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン1 — 通常状態（アカウント有効）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-3">
+          <button class="text-slate-400 text-xs hover:text-slate-200">← ユーザー一覧へ</button>
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <div class="p-6 max-w-md mx-auto">
+
+        <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+          <span>管理メニュー</span><span>›</span>
+          <span>ユーザー一覧</span><span>›</span>
+          <span class="text-gray-600">ユーザー情報編集</span>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+
+          <h2 class="text-sm font-semibold text-gray-800 mb-2">ユーザー情報を編集する</h2>
+
+          <!-- ユーザー名 -->
+          <div>
+            <label class="form-label">ユーザー名 <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="田中 太郎" disabled>
+          </div>
+
+          <!-- メールアドレス -->
+          <div>
+            <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="tanaka@example.com" disabled>
+          </div>
+
+          <!-- アカウントロック（トグル ON = ロック中） -->
+          <div>
+            <label class="form-label">アカウントロック</label>
+            <div class="flex items-center justify-between border border-gray-200 rounded-lg px-3 py-2.5 bg-white">
+              <div>
+                <p class="text-sm text-gray-700">ロック状態</p>
+                <p class="text-xs text-gray-400 mt-0.5">ONにするとこのユーザーはログインできなくなります</p>
+              </div>
+              <!-- トグル OFF（有効状態） -->
+              <div class="relative w-10 h-5 flex items-center cursor-pointer">
+                <div class="w-10 h-5 bg-gray-200 rounded-full"></div>
+                <div class="absolute left-0.5 w-4 h-4 bg-white rounded-full shadow-sm border border-gray-300"></div>
+              </div>
+            </div>
+            <p class="text-xs text-green-600 mt-1 flex items-center gap-1"><span>●</span> アカウント有効</p>
+          </div>
+
+          <!-- ボタン -->
+          <div class="flex gap-2 pt-2">
+            <button class="flex-1 bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700">変更を保存する</button>
+            <button class="border border-gray-200 text-gray-500 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">キャンセル</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン2: アカウントロック中
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン2 — アカウントロック中（トグル ON）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-3">
+          <button class="text-slate-400 text-xs hover:text-slate-200">← ユーザー一覧へ</button>
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <div class="p-6 max-w-md mx-auto">
+
+        <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+          <span>管理メニュー</span><span>›</span>
+          <span>ユーザー一覧</span><span>›</span>
+          <span class="text-gray-600">ユーザー情報編集</span>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+
+          <h2 class="text-sm font-semibold text-gray-800 mb-2">ユーザー情報を編集する</h2>
+
+          <div>
+            <label class="form-label">ユーザー名 <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="山田 次郎" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="yamada@example.com" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">アカウントロック</label>
+            <div class="flex items-center justify-between border border-red-200 rounded-lg px-3 py-2.5 bg-red-50">
+              <div>
+                <p class="text-sm text-gray-700">ロック状態</p>
+                <p class="text-xs text-gray-400 mt-0.5">ONにするとこのユーザーはログインできなくなります</p>
+              </div>
+              <!-- トグル ON（ロック中） -->
+              <div class="relative w-10 h-5 flex items-center cursor-pointer">
+                <div class="w-10 h-5 bg-red-400 rounded-full"></div>
+                <div class="absolute right-0.5 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+              </div>
+            </div>
+            <p class="text-xs text-red-600 mt-1 flex items-center gap-1"><span>●</span> アカウントロック中（ログイン不可）</p>
+          </div>
+
+          <div class="flex gap-2 pt-2">
+            <button class="flex-1 bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700">変更を保存する</button>
+            <button class="border border-gray-200 text-gray-500 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">キャンセル</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン3: バリデーションエラー
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン3 — バリデーションエラー（メールアドレス重複）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚 <span class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full ml-1">管理者</span></span>
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-medium">管</div>
+          <span class="text-slate-200 text-xs">admin</span>
+        </div>
+      </nav>
+
+      <div class="p-6 max-w-md mx-auto">
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+
+          <h2 class="text-sm font-semibold text-gray-800 mb-2">ユーザー情報を編集する</h2>
+
+          <div>
+            <label class="form-label">ユーザー名 <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="田中 太郎" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input-error" value="suzuki@example.com" disabled>
+            <p class="text-xs text-red-500 mt-1">このメールアドレスはすでに他のユーザーに使用されています</p>
+          </div>
+
+          <div>
+            <label class="form-label">アカウントロック</label>
+            <div class="flex items-center justify-between border border-gray-200 rounded-lg px-3 py-2.5 bg-white">
+              <div>
+                <p class="text-sm text-gray-700">ロック状態</p>
+                <p class="text-xs text-gray-400 mt-0.5">ONにするとこのユーザーはログインできなくなります</p>
+              </div>
+              <div class="relative w-10 h-5 flex items-center cursor-pointer">
+                <div class="w-10 h-5 bg-gray-200 rounded-full"></div>
+                <div class="absolute left-0.5 w-4 h-4 bg-white rounded-full shadow-sm border border-gray-300"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-2 pt-2">
+            <button class="flex-1 bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700">変更を保存する</button>
+            <button class="border border-gray-200 text-gray-500 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">キャンセル</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       遷移メモ
+  ======================================== -->
+  <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">画面遷移メモ</h3>
+    <div class="grid grid-cols-3 gap-4 text-xs text-gray-600">
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">保存成功</p>
+        <p>→ <span class="font-mono bg-gray-100 px-1 rounded">A-02</span> ユーザー一覧画面</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">キャンセル</p>
+        <p>→ <span class="font-mono bg-gray-100 px-1 rounded">A-02</span> ユーザー一覧画面（変更破棄）</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">遷移元</p>
+        <p>← <span class="font-mono bg-gray-100 px-1 rounded">A-02</span> 編集ボタン押下</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

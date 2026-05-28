@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書籍管理アプリ — ワイヤーフレーム</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 800: '#1e293b', 900: '#0f172a' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="docs/design/view/ワイヤーフレーム/common.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 p-8 space-y-12">
+
+  <!-- ===== タイトル ===== -->
+  <div class="text-center">
+    <h1 class="text-2xl font-bold text-slate-800 mb-1">書籍情報確認・登録画面 (U-04) — ワイヤーフレーム</h1>
+    <p class="text-sm text-gray-400">対象ロール: 利用ユーザー</p>
+  </div>
+
+  <!-- ========================================
+       パターン1: 通常状態（API取得情報プリセット済み）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン1 — 通常状態（API取得情報プリセット済み）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚</span>
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-medium">田</div>
+          <span class="text-slate-200 text-xs">田中さん</span>
+        </div>
+      </nav>
+
+      <div class="p-6 max-w-xl mx-auto">
+
+        <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+          <span>マイ書棚</span><span>›</span>
+          <span>書籍登録（ISBN入力）</span><span>›</span>
+          <span class="text-gray-600">書籍情報確認</span>
+        </div>
+
+        <!-- 取得バナー -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2.5 mb-5 flex items-start gap-2">
+          <span class="text-blue-400 text-sm mt-0.5">ℹ</span>
+          <p class="text-xs text-blue-700">書籍情報を取得しました。内容を確認・編集して登録してください。</p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+
+          <!-- タイトル -->
+          <div>
+            <label class="form-label">タイトル <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="リーダブルコード" disabled>
+          </div>
+
+          <!-- 著者 -->
+          <div>
+            <label class="form-label">著者 <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="Dustin Boswell, Trevor Foucher" disabled>
+          </div>
+
+          <!-- 出版社 -->
+          <div>
+            <label class="form-label">出版社</label>
+            <input type="text" class="form-input" value="オライリー・ジャパン" disabled>
+          </div>
+
+          <!-- 価格 -->
+          <div>
+            <label class="form-label">価格（円）</label>
+            <input type="text" class="form-input" value="2640" disabled>
+          </div>
+
+          <!-- ISBN（表示のみ） -->
+          <div>
+            <label class="form-label">ISBN</label>
+            <div class="w-full border border-gray-100 rounded-lg px-3 py-1.5 text-sm text-gray-400 bg-gray-50 font-mono">
+              9784873115658
+            </div>
+            <p class="text-xs text-gray-400 mt-0.5">ISBNは変更できません</p>
+          </div>
+
+          <!-- 書籍種別 -->
+          <div>
+            <label class="form-label">書籍種別 <span class="text-red-400">*</span></label>
+            <select class="form-select text-gray-400" disabled>
+              <option value="" selected>選択してください</option>
+              <option value="paper">紙</option>
+              <option value="ebook">電子書籍</option>
+            </select>
+          </div>
+
+          <!-- カテゴリー -->
+          <div>
+            <label class="form-label">カテゴリー <span class="text-red-400">*</span></label>
+            <select class="form-select text-gray-400" disabled>
+              <option value="" selected>選択してください</option>
+              <option>プログラミング</option>
+              <option>設計</option>
+              <option>AI・機械学習</option>
+            </select>
+          </div>
+
+          <!-- ボタン -->
+          <div class="flex gap-2 pt-2">
+            <button class="flex-1 bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700">この内容で登録する</button>
+            <button class="border border-gray-200 text-gray-500 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">← 戻る</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン2: バリデーションエラー
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン2 — バリデーションエラー（必須項目未選択）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center justify-between px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">📚 My本棚</span>
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-medium">田</div>
+          <span class="text-slate-200 text-xs">田中さん</span>
+        </div>
+      </nav>
+
+      <div class="p-6 max-w-xl mx-auto">
+
+        <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+          <span>マイ書棚</span><span>›</span>
+          <span>書籍登録（ISBN入力）</span><span>›</span>
+          <span class="text-gray-600">書籍情報確認</span>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+
+          <div>
+            <label class="form-label">タイトル <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input-error" value="" disabled>
+            <p class="text-xs text-red-500 mt-1">タイトルを入力してください</p>
+          </div>
+
+          <div>
+            <label class="form-label">著者 <span class="text-red-400">*</span></label>
+            <input type="text" class="form-input" value="Dustin Boswell" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">出版社</label>
+            <input type="text" class="form-input" value="オライリー・ジャパン" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">価格（円）</label>
+            <input type="text" class="form-input" value="2640" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">ISBN</label>
+            <div class="w-full border border-gray-100 rounded-lg px-3 py-1.5 text-sm text-gray-400 bg-gray-50 font-mono">9784873115658</div>
+          </div>
+
+          <div>
+            <label class="form-label">書籍種別 <span class="text-red-400">*</span></label>
+            <select class="w-full border border-red-300 rounded-lg px-3 py-1.5 text-sm bg-white text-gray-400" disabled>
+              <option selected>選択してください</option>
+              <option>紙</option>
+              <option>電子書籍</option>
+            </select>
+            <p class="text-xs text-red-500 mt-1">書籍種別を選択してください</p>
+          </div>
+
+          <div>
+            <label class="form-label">カテゴリー <span class="text-red-400">*</span></label>
+            <select class="w-full border border-red-300 rounded-lg px-3 py-1.5 text-sm bg-white text-gray-400" disabled>
+              <option selected>選択してください</option>
+              <option>プログラミング</option>
+            </select>
+            <p class="text-xs text-red-500 mt-1">カテゴリーを選択してください</p>
+          </div>
+
+          <div class="flex gap-2 pt-2">
+            <button class="flex-1 bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700">この内容で登録する</button>
+            <button class="border border-gray-200 text-gray-500 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">← 戻る</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       遷移メモ
+  ======================================== -->
+  <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">画面遷移メモ</h3>
+    <div class="grid grid-cols-3 gap-4 text-xs text-gray-600">
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">登録成功</p>
+        <p>→ <span class="font-mono bg-gray-100 px-1 rounded">U-01</span> 書籍一覧画面（登録完了メッセージ）</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">遷移元: ISBN入力</p>
+        <p>← <span class="font-mono bg-gray-100 px-1 rounded">U-03</span> 戻るボタンで返る</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="font-medium text-gray-700">遷移元: 手動入力</p>
+        <p>← <span class="font-mono bg-gray-100 px-1 rounded">U-06</span> 次へボタンで遷移</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

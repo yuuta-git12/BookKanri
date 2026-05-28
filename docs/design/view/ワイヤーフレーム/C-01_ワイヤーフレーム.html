@@ -27,10 +27,10 @@
   </div>
 
   <!-- ========================================
-       パターン1: 通常状態（空フォーム）
+       パターン1: 利用ユーザー向け（デフォルト表示）
   ======================================== -->
   <div>
-    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン1 — 通常状態</p>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン1 — 利用ユーザー向け（デフォルト表示）</p>
     <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
 
       <!-- ナビバー -->
@@ -42,7 +42,7 @@
 
       <!-- コンテンツ（ログインカード） -->
       <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
-        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-100 p-8">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
 
           <!-- ロゴ・タイトル -->
           <div class="text-center mb-6">
@@ -51,12 +51,69 @@
             <p class="text-xs text-gray-400 mt-0.5">書籍管理アプリにログイン</p>
           </div>
 
+          <!-- Googleでサインインボタン -->
+          <button class="w-full flex items-center justify-center gap-3 border border-gray-200 rounded-lg py-2.5 px-4 bg-white hover:bg-gray-50 shadow-sm">
+            <!-- Google ロゴ（SVG） -->
+            <svg class="w-4 h-4" viewBox="0 0 48 48">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            <span class="text-sm font-medium text-gray-700">Googleでサインイン</span>
+          </button>
+
+          <!-- 区切り -->
+          <div class="flex items-center gap-3 my-5 text-xs text-gray-400">
+            <div class="flex-1 border-t border-gray-200"></div>
+            <span>管理者の方</span>
+            <div class="flex-1 border-t border-gray-200"></div>
+          </div>
+
+          <!-- 管理者ログインリンク -->
+          <div class="text-center">
+            <button class="text-xs text-slate-500 hover:text-slate-800 underline">
+              管理者アカウントでログインする →
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン2: 管理者向けフォーム（リンク押下後）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン2 — 管理者向けフォーム（「管理者アカウントでログインする」押下後）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <!-- ナビバー -->
+      <nav class="bg-slate-800 flex items-center px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
+          📚 My本棚
+        </span>
+      </nav>
+
+      <!-- コンテンツ -->
+      <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
+
+          <!-- ロゴ・タイトル -->
+          <div class="text-center mb-6">
+            <div class="text-3xl mb-2">📚</div>
+            <h2 class="text-lg font-semibold text-slate-800">管理者ログイン</h2>
+            <p class="text-xs text-gray-400 mt-0.5">管理者専用アカウントで認証してください</p>
+          </div>
+
           <!-- フォーム -->
           <div class="space-y-4">
             <!-- メールアドレス -->
             <div>
               <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
-              <input type="text" class="form-input" placeholder="example@mail.com" disabled>
+              <input type="text" class="form-input" placeholder="admin@example.com" disabled>
             </div>
 
             <!-- パスワード -->
@@ -74,59 +131,10 @@
             </button>
           </div>
 
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ========================================
-       パターン2: バリデーションエラー（未入力）
-  ======================================== -->
-  <div>
-    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン2 — バリデーションエラー（未入力送信）</p>
-    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-
-      <!-- ナビバー -->
-      <nav class="bg-slate-800 flex items-center px-5 h-11">
-        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
-          📚 My本棚
-        </span>
-      </nav>
-
-      <!-- コンテンツ -->
-      <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
-        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
-
-          <!-- ロゴ・タイトル -->
-          <div class="text-center mb-6">
-            <div class="text-3xl mb-2">📚</div>
-            <h2 class="text-lg font-semibold text-slate-800">My本棚</h2>
-            <p class="text-xs text-gray-400 mt-0.5">書籍管理アプリにログイン</p>
-          </div>
-
-          <!-- フォーム -->
-          <div class="space-y-4">
-            <!-- メールアドレス（エラー） -->
-            <div>
-              <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
-              <input type="text" class="form-input-error" placeholder="example@mail.com" disabled>
-              <p class="text-xs text-red-500 mt-1">メールアドレスを入力してください</p>
-            </div>
-
-            <!-- パスワード（エラー） -->
-            <div>
-              <label class="form-label">パスワード <span class="text-red-400">*</span></label>
-              <div class="relative">
-                <input type="text" class="form-input-error pr-9" placeholder="••••••••" disabled>
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
-              </div>
-              <p class="text-xs text-red-500 mt-1">パスワードを入力してください</p>
-            </div>
-
-            <!-- ログインボタン -->
-            <button class="w-full bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700 mt-2">
-              ログイン
+          <!-- 利用ユーザーログインへ戻るリンク -->
+          <div class="text-center mt-4">
+            <button class="text-xs text-slate-500 hover:text-slate-800 underline">
+              ← 利用ユーザーのログインに戻る
             </button>
           </div>
 
@@ -137,28 +145,80 @@
   </div>
 
   <!-- ========================================
-       パターン3: 認証エラー（メール・パスワード不一致）
+       パターン3: 管理者フォーム — バリデーションエラー（未入力）
   ======================================== -->
   <div>
-    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン3 — 認証エラー（メールアドレスまたはパスワード不一致）</p>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン3 — 管理者フォーム — バリデーションエラー（未入力送信）</p>
     <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
 
-      <!-- ナビバー -->
       <nav class="bg-slate-800 flex items-center px-5 h-11">
         <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
           📚 My本棚
         </span>
       </nav>
 
-      <!-- コンテンツ -->
       <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
         <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
 
-          <!-- ロゴ・タイトル -->
           <div class="text-center mb-6">
             <div class="text-3xl mb-2">📚</div>
-            <h2 class="text-lg font-semibold text-slate-800">My本棚</h2>
-            <p class="text-xs text-gray-400 mt-0.5">書籍管理アプリにログイン</p>
+            <h2 class="text-lg font-semibold text-slate-800">管理者ログイン</h2>
+            <p class="text-xs text-gray-400 mt-0.5">管理者専用アカウントで認証してください</p>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
+              <input type="text" class="form-input-error" placeholder="admin@example.com" disabled>
+              <p class="text-xs text-red-500 mt-1">メールアドレスを入力してください</p>
+            </div>
+
+            <div>
+              <label class="form-label">パスワード <span class="text-red-400">*</span></label>
+              <div class="relative">
+                <input type="text" class="form-input-error pr-9" placeholder="••••••••" disabled>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs cursor-pointer select-none">表示</span>
+              </div>
+              <p class="text-xs text-red-500 mt-1">パスワードを入力してください</p>
+            </div>
+
+            <button class="w-full bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700 mt-2">
+              ログイン
+            </button>
+          </div>
+
+          <div class="text-center mt-4">
+            <button class="text-xs text-slate-500 hover:text-slate-800 underline">
+              ← 利用ユーザーのログインに戻る
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン4: 管理者フォーム — 認証エラー（メール・パスワード不一致）
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン4 — 管理者フォーム — 認証エラー（メールアドレスまたはパスワード不一致）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
+          📚 My本棚
+        </span>
+      </nav>
+
+      <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
+
+          <div class="text-center mb-6">
+            <div class="text-3xl mb-2">📚</div>
+            <h2 class="text-lg font-semibold text-slate-800">管理者ログイン</h2>
+            <p class="text-xs text-gray-400 mt-0.5">管理者専用アカウントで認証してください</p>
           </div>
 
           <!-- 認証エラーバナー -->
@@ -167,15 +227,12 @@
             <p class="text-xs text-red-600">メールアドレスまたはパスワードが違います</p>
           </div>
 
-          <!-- フォーム -->
           <div class="space-y-4">
-            <!-- メールアドレス -->
             <div>
               <label class="form-label">メールアドレス <span class="text-red-400">*</span></label>
-              <input type="text" class="form-input-error" placeholder="example@mail.com" disabled>
+              <input type="text" class="form-input-error" placeholder="admin@example.com" disabled>
             </div>
 
-            <!-- パスワード -->
             <div>
               <label class="form-label">パスワード <span class="text-red-400">*</span></label>
               <div class="relative">
@@ -184,9 +241,71 @@
               </div>
             </div>
 
-            <!-- ログインボタン -->
             <button class="w-full bg-slate-800 text-white text-sm font-medium py-2 rounded-lg hover:bg-slate-700 mt-2">
               ログイン
+            </button>
+          </div>
+
+          <div class="text-center mt-4">
+            <button class="text-xs text-slate-500 hover:text-slate-800 underline">
+              ← 利用ユーザーのログインに戻る
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================
+       パターン5: Google OAuth エラー
+  ======================================== -->
+  <div>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">パターン5 — Googleサインイン エラー（認証失敗）</p>
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+      <nav class="bg-slate-800 flex items-center px-5 h-11">
+        <span class="text-slate-100 text-sm font-medium flex items-center gap-1.5">
+          📚 My本棚
+        </span>
+      </nav>
+
+      <div class="min-h-64 flex items-center justify-center py-16 bg-gray-50">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm w-80 p-8">
+
+          <div class="text-center mb-5">
+            <div class="text-3xl mb-2">📚</div>
+            <h2 class="text-lg font-semibold text-slate-800">My本棚</h2>
+            <p class="text-xs text-gray-400 mt-0.5">書籍管理アプリにログイン</p>
+          </div>
+
+          <!-- エラーバナー -->
+          <div class="bg-red-50 border border-red-200 rounded-lg px-3 py-2.5 mb-5 flex items-start gap-2">
+            <span class="text-red-400 text-sm mt-0.5">⚠</span>
+            <p class="text-xs text-red-600">Googleアカウントでの認証に失敗しました。再度お試しください。</p>
+          </div>
+
+          <!-- Googleでサインインボタン -->
+          <button class="w-full flex items-center justify-center gap-3 border border-gray-200 rounded-lg py-2.5 px-4 bg-white hover:bg-gray-50 shadow-sm">
+            <svg class="w-4 h-4" viewBox="0 0 48 48">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            <span class="text-sm font-medium text-gray-700">Googleでサインイン</span>
+          </button>
+
+          <div class="flex items-center gap-3 my-5 text-xs text-gray-400">
+            <div class="flex-1 border-t border-gray-200"></div>
+            <span>管理者の方</span>
+            <div class="flex-1 border-t border-gray-200"></div>
+          </div>
+
+          <div class="text-center">
+            <button class="text-xs text-slate-500 hover:text-slate-800 underline">
+              管理者アカウントでログインする →
             </button>
           </div>
 
@@ -201,15 +320,16 @@
   ======================================== -->
   <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
     <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">画面遷移メモ</h3>
-    <div class="grid grid-cols-2 gap-4 text-xs text-gray-600">
-      <div class="space-y-1.5">
-        <p class="font-medium text-gray-700">認証成功</p>
-        <p>利用ユーザー → <span class="font-mono bg-gray-100 px-1 rounded">U-01</span> 書籍一覧画面</p>
-        <p>管理者 → <span class="font-mono bg-gray-100 px-1 rounded">A-01</span> 管理メニュー画面</p>
+    <div class="grid grid-cols-2 gap-6 text-xs text-gray-600">
+      <div class="space-y-3">
+        <p class="font-medium text-gray-700">利用ユーザー（Google OAuth）</p>
+        <p>認証成功 → <span class="font-mono bg-gray-100 px-1 rounded">U-01</span> 書籍一覧画面</p>
+        <p>認証失敗 → <span class="font-mono bg-gray-100 px-1 rounded">C-01</span> エラーメッセージ表示（パターン5）</p>
       </div>
-      <div class="space-y-1.5">
-        <p class="font-medium text-gray-700">認証失敗</p>
-        <p><span class="font-mono bg-gray-100 px-1 rounded">C-01</span> にとどまり、エラーメッセージ表示</p>
+      <div class="space-y-3">
+        <p class="font-medium text-gray-700">管理者（メール＋パスワード）</p>
+        <p>認証成功 → <span class="font-mono bg-gray-100 px-1 rounded">A-01</span> 管理メニュー画面</p>
+        <p>認証失敗 → <span class="font-mono bg-gray-100 px-1 rounded">C-01</span> エラーメッセージ表示（パターン4）</p>
       </div>
     </div>
   </div>
