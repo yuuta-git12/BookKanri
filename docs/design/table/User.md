@@ -11,11 +11,11 @@
 | No | PK | FK | UK | カラム名 | 項目名 | データ型 | 桁数 | NOT NULL | デフォルト値 | 列制約 | 備考 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |1|○|||id|ユーザーID|BIGINT|-|○||AUTO INCREMENT||
-|2||||username|ユーザー名|VARCHAR|255|○||||
-|3||||password|ユーザーパスワード|VARCHAR|255|○|||ハッシュ化済み|
-|4|||○|email|ユーザーメールアドレス|VARCHAR|255|○||||
-|5||||google2fa_secret|2FA秘密鍵|VARCHAR|255||||未設定時はNULL|
-|6||||login_date|最終ログイン日時|TIMESTAMP|-||||未ログイン時はNULL|
+|2|||○|google_sub|GoogleユーザーID|TEXT|-|○|||Google OAuthで取得したsub情報|
+|3||||username|ユーザー名|VARCHAR|255|○|||Google OAuthで取得したname情報|
+|4||||email|ユーザーメールアドレス|VARCHAR|255|○|||Google OAuthで取得したemail情報|
+|5||||picture|アバターURL|TEXT|-||||Google OAuthで取得したpicture情報|
+|6||||last_login_at|最終ログイン日時|TIMESTAMP|-||||未ログイン時はNULL|
 |7||||account_lock|アカウントロック|BOOLEAN|-|○|false|||
 |8||||created_at|作成日時|TIMESTAMP|-|○|now()|||
 |9||||updated_at|更新日時|TIMESTAMP|-|○|now()|||
@@ -24,7 +24,7 @@
 
 | No | インデックス名 | カラム | ユニーク | 備考 |
 |:---:|:---:|:---:|:---:|:---:|
-|1|users_email_unique|email|○||
+|1|users_google_sub_unique|google_sub|○|ログイン時の検索キー|
 
 ## 外部キー制約
 

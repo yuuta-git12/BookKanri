@@ -17,7 +17,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | フロントエンド | React（Inertia.js 経由で Laravel と連携） |
 | バックエンド | Laravel + Inertia.js |
 | データベース | PostgreSQL |
-| 認証 | メールアドレス＋パスワード + 2要素認証（google2fa） |
+| 認証 | 利用ユーザー: Google OAuth / 管理者: メールアドレス＋パスワード + 2要素認証（google2fa） |
 | スタイル | Tailwind CSS |
 | 外部API | openBD（日本書籍）/ Google Books API（補完） |
 | ホスティング | Railway（Laravel + PostgreSQL 一体構成） |
